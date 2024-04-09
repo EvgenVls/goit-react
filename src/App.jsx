@@ -11,7 +11,7 @@ function App() {
   };
 
   const [lang, setLang] = useState("uk");
-  const [value, setValue] = useState("sm");
+  const [coffeeSize, setCoffeeSize] = useState("sm");
 
   return (
     <div>
@@ -20,7 +20,7 @@ function App() {
       <SearchBar />
       <p>Selected language</p>
       <LangSwitcher value={lang} setValue={setLang} />
-      <CoffeeSize />
+      <CoffeeSize cofSizVal={coffeeSize} setCofSizVal={setCoffeeSize} />
     </div>
   );
 }

@@ -1,4 +1,10 @@
-function CoffeeSize(coffeeSize, setCoffeeSize) {
+// import { useState } from "react";
+
+function CoffeeSize({ cofSizVal, setCofSizVal }) {
+  const handleSizeChange = (event) => {
+    setCofSizVal(event.target.value);
+  };
+
   return (
     <div>
       <h2>Select coffee size</h2>
@@ -7,7 +13,8 @@ function CoffeeSize(coffeeSize, setCoffeeSize) {
           type="radio"
           name="coffeeSize"
           value="sm"
-          checked={coffeeSize === "sm"}
+          checked={cofSizVal === "sm"}
+          onChange={handleSizeChange}
         />
         Small
       </label>
@@ -16,7 +23,8 @@ function CoffeeSize(coffeeSize, setCoffeeSize) {
           type="radio"
           name="coffeeSize"
           value="md"
-          checked={coffeeSize === "md"}
+          checked={cofSizVal === "md"}
+          onChange={handleSizeChange}
         />
         Medium
       </label>
@@ -25,7 +33,8 @@ function CoffeeSize(coffeeSize, setCoffeeSize) {
           type="radio"
           name="coffeeSize"
           value="lg"
-          checked={coffeeSize === "lg"}
+          checked={cofSizVal === "lg"}
+          onChange={handleSizeChange}
         />
         Large
       </label>
