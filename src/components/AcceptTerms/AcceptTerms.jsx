@@ -1,6 +1,10 @@
-export const AcceptTerms = (accept, setAccept) => {
+export const AcceptTerms = ({ accept, setAccept }) => {
   const handlChange = (event) => {
     setAccept(event.target.checked);
+  };
+
+  const handleClick = () => {
+    console.log("You accept terms!");
   };
 
   return (
@@ -13,7 +17,7 @@ export const AcceptTerms = (accept, setAccept) => {
           onChange={handlChange}
         />
       </label>
-      <button type="button" disabled={accept}>
+      <button type="button" disabled={!accept} onClick={handleClick}>
         Proceed
       </button>
     </div>

@@ -4,6 +4,7 @@ import { SearchBar } from "./components/SearchBar/SearchBar";
 import { LangSwitcher } from "./components/LangSwitcher/LangSwitcher";
 import CoffeeSize from "./components/CoffeeSize/CoffeeSize";
 import { AcceptTerms } from "./components/AcceptTerms/AcceptTerms";
+import { ControlledForm } from "./components/ControlledForm/ControlledForm";
 import "./App.css";
 
 function App() {
@@ -14,6 +15,10 @@ function App() {
   const [lang, setLang] = useState("uk");
   const [coffeeSize, setCoffeeSize] = useState("sm");
   const [hasAccepted, setHasAccepted] = useState(false);
+  const [values, setValues] = useState({
+    login: "",
+    password: "",
+  });
 
   return (
     <div>
@@ -24,6 +29,7 @@ function App() {
       <LangSwitcher value={lang} setValue={setLang} />
       <CoffeeSize cofSizVal={coffeeSize} setCofSizVal={setCoffeeSize} />
       <AcceptTerms accept={hasAccepted} setAccept={setHasAccepted} />
+      <ControlledForm formValues={values} setFormValues={setValues} />
     </div>
   );
 }
