@@ -1,0 +1,21 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 2px solid black;
+  border-radius: 4px;
+  padding: 12px;
+}
+
+.field {
+  font: inherit;
+  padding: 2px;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.btn {
+  border: 1px solid black;
+  border-radius: 4px;
+  background-color: #fafafaf;
+}
