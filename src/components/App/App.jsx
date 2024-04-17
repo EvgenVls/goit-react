@@ -1,9 +1,26 @@
-// import { useState } from 'react'
-import FeedbackForm from "../FeedbackForm/FeedbackForm";
+import { useEffect, useState } from "react";
+// import FeedbackForm from "../FeedbackForm/FeedbackForm";
+import ArticleList from "../ArticleList/ArticleList";
 import "./App.css";
+import axios from "axios";
 
 function App() {
-  return <FeedbackForm />;
+  const [articles, setArticles] = useState([]);
+  useEffect(() => {
+    async function FeatchArticles() {
+      const response = await axios.get(
+        "https://hn.algolia.com/api/v1/search?query=react"
+      );
+      setArticles(response.data.hits);
+    }
+    FeatchArticles();
+  }, []);
+  return (
+    <div>
+      <h1>Latest articles</h1>
+      {articles.length > 0 && <ArticleList items={articles} />}
+    </div>
+  );
 }
 
 export default App;
