@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ArticleList from "../ArticleList/ArticleList";
 import { featchArticlesWithTotic } from "../../articles-api";
+import SearchForm from "../SearchForm/SerrchForm";
 import "./App.css";
 
 function App() {
@@ -8,23 +9,23 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  useEffect(() => {
-    async function FeatchArticles() {
-      try {
-        setLoading(true);
-        const data = await featchArticlesWithTotic("react");
-        setArticles(data);
-      } catch (error) {
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
+  const handleSearch = async (topic) => {
+    try {
+      setArticles([]);
+      setError(false);
+      setLoading(true);
+      const data = await featchArticlesWithTotic(topic);
+      setArticles(data);
+    } catch (error) {
+      setError(true);
+    } finally {
+      setLoading(false);
     }
-    FeatchArticles();
-    console.log(articles);
-  }, []);
+  };
+
   return (
     <div>
+      <SearchForm onSearch={handleSearch} />
       <h1>Latest articles</h1>
       {loading && <p>Loading data, please wait...</p>}
       {error && (
