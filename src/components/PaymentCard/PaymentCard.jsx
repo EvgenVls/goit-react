@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import css from "./PaymentCard.module.css";
 
 export default function PaymentCard({
@@ -14,6 +15,7 @@ export default function PaymentCard({
       <p>
         <b>Description:</b> {description}
       </p>
+      <Link to={`/payments/${id}`}>Datails</Link>
     </div>
   );
 }
