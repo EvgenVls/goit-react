@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Link, useParams, Outlet } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useParams, Outlet, useLocation } from "react-router-dom";
 import { getPaymentsById } from "../../payments-api";
 import PaymentInfo from "../../components/PaymentInfo/PaymentInfo";
 
@@ -8,6 +8,9 @@ export default function PaymentDetailsPage() {
   const [payment, setPayment] = useState(null);
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState(false);
+
+  const location = useLocation();
+  const backLinkURLRef = useRef(location.state ?? "/payments");
 
   useEffect(() => {
     async function featchPayment() {
@@ -26,8 +29,11 @@ export default function PaymentDetailsPage() {
 
   return (
     <div>
-      <b>PaymentDetailsPage</b>
+      <h3>
+        <b>PaymentDetailsPage</b>
+      </h3>
       {loader && <p>Please wait...</p>}
+      <Link to={backLinkURLRef.current}>Go back</Link>
       {payment && <PaymentInfo payment={payment} />}
       <ul>
         <li>

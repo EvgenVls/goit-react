@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { getPaymens } from "../../payments-api";
 import PaymentsList from "../../components/PaymentsList/PaymentsList";
 import OwnerFilter from "../../components/OwnerFilter/OwnerFilter";
@@ -33,6 +33,12 @@ export default function PaymentsPage() {
     featchPayments();
   }, []);
 
+  const filteredPayments = useMemo(() => {
+    return payments.filter((payment) =>
+      payment.cardOwner.toLowerCase().includes(ownerParam.toLowerCase())
+    );
+  }, [payments, ownerParam]);
+
   return (
     <div>
       <p>
@@ -40,7 +46,7 @@ export default function PaymentsPage() {
       </p>
       <OwnerFilter value={ownerParam} onFilter={changeOwnerFilter} />
       {loading && <b>Loading payments...</b>}
-      {payments.length > 0 && <PaymentsList payments={payments} />}
+      {payments.length > 0 && <PaymentsList payments={filteredPayments} />}
       {error && <p>404</p>}
     </div>
   );
