@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Navigation from "../Navigation/Navigation";
 // import css from "./Layout.module.css";
 
@@ -5,7 +6,9 @@ export default function Layout({ children }) {
   return (
     <div>
       <Navigation />
-      {children}
+      <Suspense fallback={<div>Please wait loaging page...</div>}>
+        {children}
+      </Suspense>
     </div>
   );
 }

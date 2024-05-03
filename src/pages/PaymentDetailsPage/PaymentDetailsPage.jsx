@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, Suspense } from "react";
 import { Link, useParams, Outlet, useLocation } from "react-router-dom";
 import { getPaymentsById } from "../../payments-api";
 import PaymentInfo from "../../components/PaymentInfo/PaymentInfo";
@@ -43,7 +43,9 @@ export default function PaymentDetailsPage() {
           <Link to="receipt">Receipt</Link>
         </li>
       </ul>
-      <Outlet />
+      <Suspense fallback={<div>Loading nested route...</div>}>
+        <Outlet />
+      </Suspense>
       {error && <p>404</p>}
     </div>
   );
