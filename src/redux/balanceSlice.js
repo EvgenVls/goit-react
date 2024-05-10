@@ -13,19 +13,19 @@ export const withdraw = (value) => {
 };
 
 export const balanceReducer = (state = { value: 1000 }, action) => {
-    switch (action.type) {
-      case "balance/deposit":
-        return {
-          ...state,
-          value: state.value + action.payload;
-        };
-  
-        case "balance/withdraw":
-          return {
-            ...state,
-            value: state.value - action.payload;
-          }
-      default:
-        return state;
-    }
-  };
+  switch (action.type) {
+    case "balance/deposit":
+      return {
+        ...state,
+        value: state.value + action.payload,
+      };
+
+    case "balance/withdraw":
+      return {
+        ...state,
+        value: state.value - action.payload,
+      };
+    default:
+      return state;
+  }
+};
