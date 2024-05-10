@@ -1,47 +1,19 @@
-import { createStore } from "redux";
+import { createStore, combineReducers } from "redux";
+import { balanceReducer } from "./balanceSlice";
+import { langReducer } from "./langSlice";
 
-export const deposit = (value) => {
-  return {
-    type: "balance/deposit",
-    payload: value,
-  };
-};
+// const initialState = {
+//   balance: {
+//     value: 1000,
+//   },
+//   locale: {
+//     lang: "uk",
+//   },
+// };
 
-export const withdraw = (value) => {
-  return {
-    type: "balance/withdraw",
-    payload: value,
-  };
-};
-
-const initialState = {
-  balance: {
-    value: 0,
-  },
-  locale: {
-    lang: "uk",
-  },
-};
-
-const rootReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "balance/deposit":
-      return {
-        ...state,
-        balance: {
-          value: state.balance.value + action.payload,
-        },
-      };
-    case "balance/withdraw":
-      return {
-        ...state,
-        balance: {
-          value: state.balance.value - action.payload,
-        },
-      };
-    default:
-      return state;
-  }
-};
+const rootReducer = combineReducers({
+  balance: balanceReducer,
+  locale: langReducer,
+});
 
 export const store = createStore(rootReducer);
