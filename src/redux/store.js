@@ -1,46 +1,24 @@
-import { configureStore } from "@reduxjs/toolkit";
-import balanceReducer from "./balanceSlice";
-import langReducer from "./langSlice";
+import { createStore } from "redux";
+import { devToolsEnhancer } from "@redux-devtools/extension";
+import { statusFilters } from "./costants";
 
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from "redux-persist";
-import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
-
-const balancePersistConfig = {
-  key: "balanceValue",
-  storage,
-  whitelist: ["value"],
-};
-
-const pBalanceReducer = persistReducer(balancePersistConfig, balanceReducer);
-
-const localePersistConfig = {
-  key: "lang",
-  storage,
-  whitelist: ["lang"],
-};
-
-const pLocaleReducer = persistReducer(localePersistConfig, langReducer);
-
-export const store = configureStore({
-  reducer: {
-    balance: pBalanceReducer,
-    locale: pLocaleReducer,
+const initialState = {
+  tasks: [
+    { id: 0, text: "Learn HTML and CSS", completed: true },
+    { id: 1, text: "Get good at JavaScript", completed: true },
+    { id: 2, text: "Master React", completed: false },
+    { id: 3, text: "Discover Redux", completed: false },
+    { id: 4, text: "Build amazing apps", completed: false },
+  ],
+  filters: {
+    status: statusFilters.all,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
-});
+};
 
-export const persistor = persistStore(store);
+const enhancer = devToolsEnhancer();
+
+const rootReducer = (state = initialState) => {
+  return state;
+};
+
+export const store = createStore(rootReducer, enhancer);
