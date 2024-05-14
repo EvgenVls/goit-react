@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "../Button/Button";
 import { statusFilters } from "../../redux/costants";
 import { getStatusFilter } from "../../redux/selectors";
-import { setStatusFilter } from "../../redux/actions";
+import { setStatusFilter } from "../../redux/filtrsSlice";
 import css from "./StatusFilter.module.css";
 
 export default function StatusFilter() {
