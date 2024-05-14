@@ -7,7 +7,7 @@ export default function TaskForm() {
   const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
-    event.prevenDefault();
+    event.preventDefault();
     const form = event.target;
     dispatch(addTask(form.elements.text.value));
     form.reset();
