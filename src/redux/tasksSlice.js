@@ -16,6 +16,10 @@ const slice = createSlice({
       .addCase(feachTasks.fulfilled, (state, action) => {
         state.items = action.payload;
         state.loading = false;
+      })
+      .addCase(feachTasks.rejected, (state) => {
+        state.error = true;
+        state.loading = false;
       }),
 });
 
