@@ -1,36 +1,26 @@
-import { useState } from "react";
-import Filter from "../Filter/Filter";
-import Form from "../Form/Form";
-import TaskList from "../TaskList/TaskList";
-import initialTasks from "../../tasks.json";
-import css from "./App.module.css";
+import { lazy, Suspense } from "react";
+import { Route, Routes } from "react-router-dom";
+import Layout from "../Layout/Layout";
+
+const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
+const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage"));
+const RegisterPage = lazy(() =>
+  import("../../pages/RegisterPage/RegisterPage")
+);
+const TasksPage = lazy(() => import("../../pages/TasksPage/TasksPage"));
 
 function App() {
-  const [tasks, setTasks] = useState(initialTasks);
-  const [filter, setFilter] = useState("");
-
-  const addTask = (newTask) => {
-    setTasks((prevTasks) => {
-      return [...prevTasks, newTask];
-    });
-  };
-
-  const deleteTask = (taskId) => {
-    setTasks((prevTasks) => {
-      return prevTasks.filter((task) => task.id !== taskId);
-    });
-  };
-
-  const visibleTasks = tasks.filter((task) =>
-    task.text.toLowerCase().includes(filter.toLowerCase())
-  );
-
   return (
-    <div className={css.container}>
-      <Form onAdd={addTask} />
-      <Filter value={filter} onFilter={setFilter} />
-      <TaskList tasks={visibleTasks} onDelete={deleteTask} />
-    </div>
+    <Layout>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/tasks" element={<TasksPage />} />
+        </Routes>
+      </Suspense>
+    </Layout>
   );
 }
 
