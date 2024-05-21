@@ -27,7 +27,7 @@ export default function RegistrationForm() {
         </label>
         <label className={css.label}>
           Password
-          <Field type="text" name="password" />
+          <Field type="password" name="password" />
         </label>
         <button type="submit">Register</button>
       </Form>
