@@ -8,7 +8,7 @@ export default function UserMenu() {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(logOut);
+    dispatch(logOut());
   };
   return (
     <div className={css.wrapper}>
