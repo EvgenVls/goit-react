@@ -19,7 +19,7 @@ export default function RegistrationForm() {
       <Form className={css.form} autoComplete="off">
         <label className={css.label}>
           Username
-          <Field type="text" name="username" />
+          <Field type="text" name="name" />
         </label>
         <label className={css.label}>
           Email
