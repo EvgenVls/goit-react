@@ -10,7 +10,7 @@ export default function LoginForm() {
   const handleSubmit = (values, actions) => {
     dispatch(logIn(values))
       .unwrap()
-      .then((data) => {
+      .then(() => {
         toast.success("Success!!!");
       })
       .catch((error) => {
